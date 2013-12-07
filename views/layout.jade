@@ -4,4 +4,17 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    if (!user)
+      p
+        a(href="/") Home
+        |  |
+        a(href="/login")   Log In
+    else
+      p
+        a(href="/") Home
+        |  |
+        a(href="/account")   Account
+        |  |
+        a(href="/logout")   Log Out
+
     block content
