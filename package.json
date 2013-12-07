@@ -1,0 +1,21 @@
+"name": "application-name",
+  "description": "A simple helper to register users into programming contest",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodejs app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jhonber/contest-register.git"
+  },
+  "keywords": [
+    "Programming Contest",
+    "register"
+  ],
+  "author": "Jhon Jimenez - Manuel Pineda",
+  "license": "Public domain",
+  "bugs": {
+    "url": "https://github.com/jhonber/contest-register/issues"
+
+  }
