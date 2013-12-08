@@ -1,9 +1,28 @@
-var path = require('path');
+var express = require('express');
+var path  = require('path');
+var flash = require('connect-flash');
 
-module.exports = {
-    db: 'mongodb://localhost/test',
-    root: path.normalize(__dirname + '/..'),
-    app: {
-      name: 'Contest Register'
-    }
+module.exports = function(app,config,passport){
+  // all environments
+  app.set('port', process.env.PORT || 3000);
+  app.set('views', path.join(__dirname, '../app/views'));
+  app.set('view engine', 'jade');
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.json());
+  app.use(express.urlencoded());
+  app.use(express.methodOverride());
+  app.use(express.cookieParser('indiscreet monKEY is typing now'));
+  app.use(express.session({ cookie: { maxAge: 60000 }}));
+  // Passport use-set (Begin cut)
+  app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
+  // End cut.
+  app.use(app.router);
+  app.use(require('less-middleware')({ src: path.join(__dirname, '../public') }));
+  app.use(express.static(path.join(__dirname, '../public')));
+  if ('development' == app.get('env')) {
+    app.use(express.errorHandler());
+  }
 }

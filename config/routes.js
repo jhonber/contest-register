@@ -2,15 +2,12 @@ var controllers = require('../app/controllers');
 var userController = require('../app/controllers/user');
 
 module.exports = function(app,passport){
-  // development only
 
 
   app.get('/', controllers.index);
   app.get('/users', userController.list);
 
-
   // Begin cut: passport stuff.
-
   app.get('/account', ensureAuthenticated, function(req, res){
     res.render('account', { user: req.user });
   });
@@ -29,6 +26,7 @@ module.exports = function(app,passport){
     req.logout();
     res.redirect('/');
   });
+  // End cut passport stuff.
 
 }
 

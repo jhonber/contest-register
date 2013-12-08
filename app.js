@@ -1,31 +1,22 @@
-
-/**
-* Module dependencies.
-*/
-
+//  Requires
 var express = require('express');
 var passport = require('passport');
-
+var http = require('http');
 var config = require('./config/config');
 
-require('./config/passport')(passport, config)
 
+//  Build app
 var app = express()
 
-// express settings
-require('./config/express')(app, config, passport)
 
+// Settings
+require('./config/passport')(passport, config)
+require('./config/config')(app, config, passport)
 require('./config/routes')(app, passport)
 
 // Start the app by listening on <port>
 
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
 
-var port = process.env.PORT || 3000
-app.listen(port)
-console.log('Contest register started on port ' + port)
-
-// expose app
-exports = module.exports = app
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
