@@ -6,9 +6,11 @@ html
   body
     if (!user)
       p
-        a(href="/") Home
+        a( href = "/" ) Home
         |  |
-        a(href="/login")   Log In
+        a( href = "/login" )   Log In
+        |  |
+        a( href = "/register")  Register
     else
       p
         a(href="/") Home

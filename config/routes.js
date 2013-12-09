@@ -1,13 +1,13 @@
 var controllers = require('../app/controllers');
 var userController = require('../app/controllers/user');
+var User = require('../app/models/users');
 
-module.exports = function(app,passport){
+module.exports = function(app, passport){
 
 
   app.get('/', controllers.index);
   app.get('/users', userController.list);
 
-  // Begin cut: passport stuff.
   app.get('/account', ensureAuthenticated, function(req, res){
     res.render('account', { user: req.user });
   });
@@ -26,7 +26,19 @@ module.exports = function(app,passport){
     req.logout();
     res.redirect('/');
   });
-  // End cut passport stuff.
+
+  app.get('/register', function(req, res){
+    res.render('register', {});
+  });
+
+  app.post('/register', function(req, res){
+    User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+      if(err){
+        return res.render('/register', {user : user , failureFlash : true });
+      }
+      res.redirect('/');
+    });
+  });
 
 }
 
