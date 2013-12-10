@@ -41,9 +41,12 @@ module.exports = function(app, passport){
     });
   });
 
-//  app.get('/contests', ensureAuthenticated, contestController.list);
-  app.namespace('/contests', function(){
-    app.get('/',ensureAuthenticated,contestController.list);
+  app.namespace('/contests', ensureAuthenticated, function(){
+    app.get('/', contestController.list);
+    app.get('/create', function(req, res){
+      res.render('createContest', {});
+    });
+    app.post('/create', contestController.create);
   });
 
 }
