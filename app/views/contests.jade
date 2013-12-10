@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h2 Contests list:
+  each val in contests
+    li= val.contestname + ' ' + val.date
+    br

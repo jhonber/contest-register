@@ -1,5 +1,6 @@
 var controllers = require('../app/controllers');
 var userController = require('../app/controllers/user');
+var contestController = require('../app/controllers/contest');
 var User = require('../app/models/users');
 
 module.exports = function(app, passport){
@@ -39,6 +40,8 @@ module.exports = function(app, passport){
       res.redirect('/');
     });
   });
+
+  app.get('/contests', ensureAuthenticated, contestController.list);
 
 }
 
