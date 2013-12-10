@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h2 Create Contest
+
+  form(action="/contests/create",method="post")
+    div
+      label Name
+      input(type="text",name="name")
+
+    div
+      label Date
+      input(type="text",name="date")
+
+    div
+      input(type="submit",value="Create")
