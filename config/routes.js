@@ -35,7 +35,7 @@ module.exports = function(app, passport){
   app.post('/register', function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
       if(err){
-        return res.render('/register', {user : user , failureFlash : true });
+        return res.render('/register', {user : req.user , failureFlash : true });
       }
       res.redirect('/');
     });

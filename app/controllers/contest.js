@@ -5,8 +5,8 @@ var Contest = require('../models/contests');
 module.exports = {
 
   list : function(req, res){
+<<<<<<< HEAD
     /*
-    //Population indefinitely
     var c1 = new Contest({ contestname: "Maraton viernes", date : Date.now() });
     var c2 = new Contest({ contestname: "Maraton sábado", date : Date.now() });
 
@@ -19,7 +19,7 @@ module.exports = {
     });
     */
     Contest.find({}, function(err, cont){
-      res.render('contests', { contests : cont});
+      res.render('contests', { user : req.user , contests : cont});
     });
 
   }
