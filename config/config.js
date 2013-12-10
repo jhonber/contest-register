@@ -13,7 +13,7 @@ module.exports = function(app,config,passport){
   app.use(express.urlencoded());
   app.use(express.methodOverride());
   app.use(express.cookieParser('indiscreet monKEY is typing now'));
-  app.use(express.session({ cookie: { maxAge: 60000 }}));
+  app.use(express.session());
   // Passport use-set (Begin cut)
   app.use(flash());
   app.use(passport.initialize());
