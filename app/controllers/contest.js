@@ -5,7 +5,6 @@ var Contest = require('../models/contests');
 module.exports = {
 
   list : function(req, res){
-<<<<<<< HEAD
     /*
     var c1 = new Contest({ contestname: "Maraton viernes", date : Date.now() });
     var c2 = new Contest({ contestname: "Maraton sábado", date : Date.now() });
