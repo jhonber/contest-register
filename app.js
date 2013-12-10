@@ -1,4 +1,5 @@
 //  Requires
+var namespace = require('express-namespace');
 var express  = require('express');
 var passport = require('passport');
 var http   = require('http');

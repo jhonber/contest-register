@@ -41,7 +41,10 @@ module.exports = function(app, passport){
     });
   });
 
-  app.get('/contests', ensureAuthenticated, contestController.list);
+//  app.get('/contests', ensureAuthenticated, contestController.list);
+  app.namespace('/contests', function(){
+    app.get('/',ensureAuthenticated,contestController.list);
+  });
 
 }
 

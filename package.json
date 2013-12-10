@@ -1,4 +1,5 @@
 {
+
   "name": "contest-register",
   "description": "A simple helper to register users into programming contest",
   "version": "0.0.1",
@@ -29,6 +30,7 @@
     "passport-local" : "0.1.6",
     "connect-flash" : "0.1.1",
     "mongoose" : "3.8.1",
-    "passport-local-mongoose" : "0.2.5"
+    "passport-local-mongoose" : "0.2.5",
+    "express-namespace": "0.1.1"
   }
 }
