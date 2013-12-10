@@ -12,7 +12,7 @@ module.exports = {
   register : function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
       if(err){
-        return res.render('/user/register', {user : user , failureFlash : true });
+        return res.render('register', {user : user , failureFlash : true });
       }
       res.redirect('/');
     });
