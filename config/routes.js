@@ -5,40 +5,16 @@ var User = require('../app/models/users');
 
 module.exports = function(app, passport){
 
-
   app.get('/', controllers.index);
-  app.get('/users', userController.list);
 
-  app.get('/account', ensureAuthenticated, function(req, res){
-    res.render('account', { user: req.user });
-  });
-
-  app.get('/login', function(req, res){
-    res.render('login', { user: req.user, message: req.flash('error') });
-  });
-
-  app.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-    function(req, res) {
-      res.redirect('/');
-    });
-
-  app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
-
-  app.get('/register', function(req, res){
-    res.render('register', {});
-  });
-
-  app.post('/register', function(req, res){
-    User.register(new User({username: req.body.username}), req.body.password, function(err, user){
-      if(err){
-        return res.render('/register', {user : req.user , failureFlash : true });
-      }
-      res.redirect('/');
-    });
+  app.namespace('/user',function(){
+    app.get('/account', ensureAuthenticated, userController.show);
+    app.get('/login', userController.login);
+    app.post('/login', passport.authenticate('local', { failureRedirect: '/user/login', failureFlash: true }), userController.successLogin );
+    app.get('/logout', userController.logout);
+    app.get('/register', userController.getRegister);
+    app.post('/register', userController.register);
+    app.get('/list', userController.list);
   });
 
   app.namespace('/contests', ensureAuthenticated, function(){
@@ -53,5 +29,5 @@ module.exports = function(app, passport){
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
+  res.redirect('/user/login')
 }
