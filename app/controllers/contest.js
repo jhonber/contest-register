@@ -1,5 +1,3 @@
-var mongoose = require('mongoose');
-//  , Contest = mongoose.model('Contest');
 var Contest = require('../models/contests');
 
 module.exports = {
@@ -17,7 +15,11 @@ module.exports = {
       if (err) return handleError(err);
     });
 
-    res.render('contests', {user : req.user});
+    res.redirect('/contests');
+  },
+
+  form: function(req, res){
+    res.render('createContest', {});
   }
 
 };

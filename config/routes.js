@@ -19,9 +19,7 @@ module.exports = function(app, passport){
 
   app.namespace('/contests', ensureAuthenticated, function(){
     app.get('/', contestController.list);
-    app.get('/create', function(req, res){
-      res.render('createContest', {});
-    });
+    app.get('/create', contestController.form);
     app.post('/create', contestController.create);
   });
 
