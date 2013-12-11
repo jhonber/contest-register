@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  if (message)
+    p #{message}
+
   h2 Register
 
   form(action="/user/register",method="post")

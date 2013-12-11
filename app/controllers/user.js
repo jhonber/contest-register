@@ -11,10 +11,10 @@ module.exports = {
 
   register : function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
-      if(err){
-        return res.render('register', {user : user , failureFlash : true });
-      }
-      res.redirect('/');
+      if(err)
+        res.render('register', {user : user, message: err, failureFlash : true });
+      else
+        res.redirect('/');
     });
   },
 
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   login : function(req, res){
-      res.render('login', { user: req.user, message: req.flash('error') });
+      res.render('login', { user: req.user, message: req.flash('error'), failureFlash : true });
   },
 
   successLogin : function(req, res) {
@@ -39,5 +39,5 @@ module.exports = {
     res.render('register', {});
   }
 
- 
+
 };
