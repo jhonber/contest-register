@@ -4,5 +4,9 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Contest Register', user : req.user});
+  var message = req.flash('info');
+  var type = req.flash('type');
+  if(message == "") message = null;
+  if(type == "") type =  null;
+  res.render('index', { title: 'Contest Register', user : req.user , message : message , type : type });
 };

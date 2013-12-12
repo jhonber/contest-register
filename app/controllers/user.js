@@ -12,9 +12,11 @@ module.exports = {
   register : function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
       if(err)
-        res.render('register', {user : user, message: err, failureFlash : true });
-      else
+        res.render('register', {user : user, message: err, type : 'error', failureFlash : true });
+      else{
+        req.flash('info', 'success register');
         res.redirect('/');
+      }
     });
   },
 
@@ -23,10 +25,14 @@ module.exports = {
   },
 
   login : function(req, res){
-      res.render('login', { user: req.user, message: req.flash('error'), failureFlash : true });
+      var err = req.flash('error');
+      if(err == "") err = null;
+      res.render('login', { user: req.user, message: err, type : 'error', failureFlash : true  });
   },
 
   successLogin : function(req, res) {
+    //res.render('login', {message : 'success login' , type : 'success'} );
+    req.flash('info','success login');
     res.redirect('/');
   },
 

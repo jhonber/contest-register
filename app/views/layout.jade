@@ -21,4 +21,8 @@ html
         |  |
         a(href="/user/logout")   Log Out
 
+    if(message)
+      - var typeAlert = 'alert-box ' +  ( (!type) ? 'success' : type)
+      p(class= typeAlert ) #{message}
+
     block content
