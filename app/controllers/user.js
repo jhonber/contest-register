@@ -38,11 +38,18 @@ module.exports = {
 
   logout : function(req, res){
     req.logout();
+    req.flash('info', 'Bye bye');
+    req.flash('type', 'notice');
     res.redirect('/');
   },
 
   getRegister : function(req, res){
     res.render('register', {});
+  },
+
+  loginGoogle : function(req, res){
+    req.flash('info', 'Log in with google account');
+    res.redirect('/');
   }
 
 

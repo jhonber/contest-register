@@ -17,6 +17,16 @@ module.exports = function(app, passport){
     app.get('/list', userController.list);
   });
 
+
+  app.namespace('/auth', function(){
+    app.get('/google',
+            passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email'] }),
+            function(req,res){/*this function will not be called because the request will be redirected by google*/ });
+
+    app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/user/login' }), userController.loginGoogle);
+
+  });
+
   app.namespace('/contests', ensureAuthenticated, function(){
     app.get('/', contestController.list);
     app.get('/create', contestController.form);
