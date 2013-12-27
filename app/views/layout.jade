@@ -4,13 +4,18 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    if (!user)
+    h1 Contest Register
+    if (!everyauth.loggedIn)
       p
-        a( href = "/" ) Home
-        |  |
-        a( href = "/auth/facebook" )   Log In with Facebook
-        |  |
-        a( href = "/user/register")  Register
+        h3 Log on with:
+          a(href='/auth/google', style='border: 0px')
+            img(style='border: 0px', src='/images/facebook.ico')
+
+          a(href='/auth/facebook', style='border: 0px')
+            img(style='border: 0px', src='/images/google.ico')
+
+          a(href='/auth/github', style='border: 0px')
+            img(style='border: 0px', src='/images/github.ico')
     else
       p
         a(href="/") Home

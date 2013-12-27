@@ -11,6 +11,7 @@ var tokens    = require('./config/tokens');
 var usersById = {};
 var nextUserId = 0;
 var usersByGoogleId = {};
+var usersByGhId = {};
 
 function addUser (source, sourceUser) {
   var user;
@@ -24,6 +25,11 @@ function addUser (source, sourceUser) {
   }
   return user;
 }
+
+everyauth.everymodule
+  .findUserById( function (id, callback) {
+    callback(null, usersById[id]);
+  });
 
 everyauth
   .facebook
@@ -46,10 +52,13 @@ everyauth.google
   })
   .redirectPath('/');
 
-everyauth.everymodule
-  .findUserById( function (id, callback) {
-    callback(null, usersById[id]);
-  });
+everyauth.github
+  .appId(tokens.github.appId)
+  .appSecret(tokens.github.appSecret)
+  .findOrCreateUser( function (sess, accessToken, accessTokenExtra, ghUser) {
+      return usersByGhId[ghUser.id] || (usersByGhId[ghUser.id] = addUser('github', ghUser));
+  })
+  .redirectPath('/');
 
 //  Build app
 var app = express();

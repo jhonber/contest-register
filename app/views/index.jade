@@ -1,16 +1,19 @@
-- if (!everyauth.loggedIn)
-  h2 Not Authenticated
-  a(href='/auth/facebook') Connect with Facebook
-  br
-  a(href='/auth/google') Connect with Google
+extends layout
 
-- else
-  h2 Authenticated
+block content
+  - if (!everyauth.loggedIn)
+    h2 Not Authenticated
+
+  - else
+    h2 Authenticated
   - if (everyauth.facebook)
     h3 Facebook User Data
     p= JSON.stringify(everyauth.facebook.user)
   - if (everyauth.google)
     h3 Google User Data
     p= JSON.stringify(everyauth.google.user)
-  h3
-    a(href='/logout') Logout
+  - if (everyauth.github)
+    h3 Github User Data
+    p= JSON.stringify(everyauth.github.user)
+    h3
+      a(href='/logout') Logout
