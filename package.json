@@ -29,6 +29,7 @@
     "mongoose": "3.8.1",
     "passport-local-mongoose": "0.2.5",
     "express-namespace": "0.1.1",
-    "passport-google-oauth": "~0.1.5"
+    "passport-google-oauth": "~0.1.5",
+    "everyauth": "~0.4.5"
   }
 }

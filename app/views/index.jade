@@ -1,5 +1,16 @@
-extends layout
+- if (!everyauth.loggedIn)
+  h2 Not Authenticated
+  a(href='/auth/facebook') Connect with Facebook
+  br
+  a(href='/auth/google') Connect with Google
 
-block content
-  h1= title
-  p Welcome to #{title}
+- else
+  h2 Authenticated
+  - if (everyauth.facebook)
+    h3 Facebook User Data
+    p= JSON.stringify(everyauth.facebook.user)
+  - if (everyauth.google)
+    h3 Google User Data
+    p= JSON.stringify(everyauth.google.user)
+  h3
+    a(href='/logout') Logout
