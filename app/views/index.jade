@@ -8,11 +8,12 @@ block content
     h2 Authenticated
   - if (everyauth.facebook)
     h3 Facebook User Data
-    p= JSON.stringify(everyauth.facebook.user)
+    p JSON.stringify(everyauth.facebook.user)
   - if (everyauth.google)
     h3 Google User Data
-    p= JSON.stringify(everyauth.google.user)
+    p JSON.stringify(everyauth.google.user)
   - if (everyauth.github)
     h3 Github User Data
-    p= JSON.stringify(everyauth.github.user)
-    p= everyauth.github.user.name
+    p JSON.stringify(everyauth.github.user)
+    p everyauth.github.user.name
+
