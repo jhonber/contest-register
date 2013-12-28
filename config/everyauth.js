@@ -17,47 +17,37 @@ module.exports = function(everyauth, config){
       user = usersById[++nextUserId] = {id: nextUserId};
       user[source] = sourceUser;
     }
+
+    //console.log("data: " + JSON.stringify( dataUser.id ));
+
+    User.findOne({"id": sourceUser.id}, function(err, user){
+      if(!user){
+        user = new User({
+          id: sourceUser.id,
+          name: sourceUser.name
+        })
+        user.save(function (err) {
+          if (err) console.log(err)
+        })
+      }
+      else {
+        console.log("Ya está!! " + sourceUser.name);
+      }
+    });
+
+    // To show all users
+    User.find(function (err, users) {
+      if(err) console.log("Paila")
+      console.log(users)
+    })
+
+
     return user;
   }
-/*
-  function findService (userObject){
-    for (key in userObject){
-      if(key == 'github'){
-        return userObject.github;
-      }
-      else if(key == 'facebook'){
-        return userObject.facebook;
-      }
-      else if(key == 'google'){
-        return userObject.google;
-      }
-    }
-  }
-*/
+
   everyauth.everymodule
     .findUserById( function (id, callback) {
       callback(null, usersById[id]);
-      /*dataUser = findService(usersById[id]);
-
-      console.log("2: " + JSON.stringify( dataUser ));
-
-
-      User.findById(id, function(err, user){
-        if(!user){
-          user = new User({
-            username: dataUser.name,
-            email: dataUser.email
-          })
-          user.save(function (err) {
-            if (err) console.log(err)
-          })
-        }
-       else {
-          console.log(dataUser.email);
-          return;
-       }
-      });
-     */
     });
 
   everyauth

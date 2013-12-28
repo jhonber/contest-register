@@ -1,12 +1,8 @@
-var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema,
-    passportLocalMongoose = require('passport-local-mongoose');
+var mongoose = require('mongoose');
 
-var Contest = new Schema({
+var Contest = new mongoose.Schema({
     contestname : String,
     date : Date
 });
-
-Contest.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Contest', Contest);
