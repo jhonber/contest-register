@@ -2,7 +2,16 @@ extends layout
 
 block content
 
-  a( class = 'field', href = "/auth/google") Log in using your google account
+  p
+    h3 Log in with:
+    a(href='/auth/facebook', style='border: 0px; margin-right: 10px; margin-left: 10px;')
+      img(style='border: 0px', src='/images/facebook.ico')
+
+    a(href='/auth/google', style='border: 0px; margin-right: 10px')
+      img(style='border: 0px', src='/images/google.ico')
+
+    a(href='/auth/github', style='border: 0px; margin-right: 10px')
+      img(style='border: 0px', src='/images/github.ico')
 
   form(action = "/user/login" , method = "post")
     div

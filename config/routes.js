@@ -10,6 +10,7 @@ module.exports = function(app,everyauth){
   app.namespace('/user',function(){
     app.get('/account', ensureAuthenticated, userController.show);
     app.get('/login', userController.login);
+    app.post('/login', ensureAuthenticated, userController.successLogin );
     app.get('/logout', userController.logout);
     app.get('/register', userController.getRegister);
     app.post('/register', userController.register);
