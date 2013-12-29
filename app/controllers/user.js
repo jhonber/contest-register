@@ -6,7 +6,7 @@ var User = require('../models/users');
 
 module.exports = {
   list : function(req, res){
-           res.send("respond with a resource");
+    res.send("respond with a resource");
   },
 
   register : function(req, res){
@@ -21,6 +21,7 @@ module.exports = {
   },
 
   show : function(req, res){
+    require('./general')(req,res);
     res.render('account', { user: req.user });
   },
 
