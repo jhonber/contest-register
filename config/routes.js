@@ -3,7 +3,7 @@ var userController = require('../app/controllers/user');
 var contestController = require('../app/controllers/contest');
 var User = require('../app/models/users');
 
-module.exports = function(app){
+module.exports = function(app,everyauth){
 
   app.get('/', controllers.index);
 
@@ -21,10 +21,9 @@ module.exports = function(app){
     app.get('/create', contestController.form);
     app.post('/create', contestController.create);
   });
-
 }
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+  if (req.loggedIn) { return next(); }
   res.redirect('/user/login')
 }
