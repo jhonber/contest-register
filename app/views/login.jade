@@ -1,11 +1,11 @@
 extends layout
 
 block content
-
   - if ('undefined' !== typeof errors && errors.length)
     ul#errors
     - each error in errors
       li.error= error
+
   form(action='/login', method='post')
     #login
       label(for=everyauth.password.loginFormFieldName) Login
